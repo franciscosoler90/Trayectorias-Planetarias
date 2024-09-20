@@ -12,26 +12,26 @@ El objetivo de este proyecto es estudiar cómo se mueven Plutón, Urano y Neptun
 ## Instalación
 
 1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/tu_usuario/Trayectorias-Planetarias.git
-   cd Trayectorias-Planetarias
-   ```
+```bash
+git clone https://github.com/fransolerc/Trayectorias-Planetarias.git
+cd Trayectorias-Planetarias
+```
 
 2. Configura un Entorno Virtual (Opcional, pero recomendado)
-   ```bash
-	python -m venv env
-	.\env\Scripts\activate
-	```
+```bash
+python -m venv env
+.\env\Scripts\activate
+```
 
 3. Instalar las dependencias
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+```
 
 4. Ejecutar el proyecto
-	```bash
-	python main.py
-	```
+```bash
+python main.py
+```
 
 ## Dependencias
 Este proyecto requiere las siguientes librerías:
