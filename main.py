@@ -1,79 +1,85 @@
 import ephem
 import datetime
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 
-def calcular_signo_zodiacal(grado):
-    signos_zodiacales = ["Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario",
-                         "Capricornio", "Acuario", "Piscis"]
-    indice = int(grado // 30)
-    return signos_zodiacales[indice]
+def calculate_zodiac_sign(degree):
+    zodiac_signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius",
+                    "Capricorn", "Aquarius", "Pisces"]
+    index = int(degree // 30)
+    return zodiac_signs[index]
 
 
-def calcular_posicion_planeta(planeta, fecha):
-    observador = ephem.Observer()
-    observador.date = fecha
-    planeta.compute(observador)
+def calculate_planet_position(planet, date):
+    observer = ephem.Observer()
+    observer.date = date
+    planet.compute(observer)
 
-    try:
-        # Usar la longitud heliocéntrica directamente si está disponible
-        longitud_ecliptica = float(planeta.hlong) * 180.0 / ephem.pi
-    except AttributeError:
-        # Como alternativa, puedes calcularla manualmente o usar 'ra' y 'dec'
-        longitud_ecliptica = float(planeta.ra) * 180.0 / ephem.pi
+    # Get the ecliptic longitude of the planet
+    ecliptic_longitude = float(planet.hlong) * 180.0 / ephem.pi
+    ecliptic_longitude = ecliptic_longitude % 360
+    return ecliptic_longitude
 
-    longitud_ecliptica = longitud_ecliptica % 360
-    return longitud_ecliptica
+
+def sign_to_value(sign):
+    zodiac_signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius",
+                    "Capricorn", "Aquarius", "Pisces"]
+    return zodiac_signs.index(sign)
 
 
 def main():
-    fecha_inicial = datetime.datetime(1990, 1, 1)
-    fecha_final = datetime.datetime(2030, 12, 31)
+    start_date = datetime.datetime(1990, 1, 1)
+    end_date = datetime.datetime(2030, 12, 31)
 
-    fechas = []
-    signos_pluton = []
-    signos_urano = []
-    signos_neptuno = []
+    dates = []
+    pluto_values = []
+    uranus_values = []
+    neptune_values = []
 
-    delta = datetime.timedelta(days=10)  # Intervalo de 10 días
-    fecha_actual = fecha_inicial
-    while fecha_actual < fecha_final:
-        # Calcula la posición de Plutón
-        longitud_ecliptica_pluton = calcular_posicion_planeta(ephem.Pluto(), fecha_actual)
-        signo_pluton = calcular_signo_zodiacal(longitud_ecliptica_pluton)
+    delta = datetime.timedelta(days=10)  # Interval of 10 days
+    current_date = start_date
+    while current_date < end_date:
+        pluto_ecliptic_longitude = calculate_planet_position(ephem.Pluto(), current_date)
+        pluto_sign = calculate_zodiac_sign(pluto_ecliptic_longitude)
+        pluto_value = sign_to_value(pluto_sign)
 
-        # Calcula la posición de Urano
-        longitud_ecliptica_urano = calcular_posicion_planeta(ephem.Uranus(), fecha_actual)
-        signo_urano = calcular_signo_zodiacal(longitud_ecliptica_urano)
+        uranus_ecliptic_longitude = calculate_planet_position(ephem.Uranus(), current_date)
+        uranus_sign = calculate_zodiac_sign(uranus_ecliptic_longitude)
+        uranus_value = sign_to_value(uranus_sign)
 
-        # Calcula la posición de Neptuno
-        longitud_ecliptica_neptuno = calcular_posicion_planeta(ephem.Neptune(), fecha_actual)
-        signo_neptuno = calcular_signo_zodiacal(longitud_ecliptica_neptuno)
+        neptune_ecliptic_longitude = calculate_planet_position(ephem.Neptune(), current_date)
+        neptune_sign = calculate_zodiac_sign(neptune_ecliptic_longitude)
+        neptune_value = sign_to_value(neptune_sign)
 
-        fechas.append(fecha_actual)
-        signos_pluton.append(signo_pluton)
-        signos_urano.append(signo_urano)
-        signos_neptuno.append(signo_neptuno)
+        dates.append(current_date)
+        pluto_values.append(pluto_value)
+        uranus_values.append(uranus_value)
+        neptune_values.append(neptune_value)
 
-        fecha_actual += delta
+        current_date += delta
+
+    # Convert the dates to numerical format for matplotlib
+    dates_num = mdates.date2num(dates)
 
     plt.figure(figsize=(10, 6))
 
-    # Graficar la trayectoria de Plutón
-    plt.plot(fechas, signos_pluton, label='Plutón', linestyle='-', marker='o')
+    plt.plot(dates_num, pluto_values, label='Pluto', linestyle='-', marker='o')
+    plt.plot(dates_num, uranus_values, label='Uranus', linestyle='-', marker='o')
+    plt.plot(dates_num, neptune_values, label='Neptune', linestyle='-', marker='o')
 
-    # Graficar la trayectoria de Urano
-    plt.plot(fechas, signos_urano, label='Urano', linestyle='-', marker='o')
-
-    # Graficar la trayectoria de Neptuno
-    plt.plot(fechas, signos_neptuno, label='Neptuno', linestyle='-', marker='o')
-
-    plt.xlabel('Fecha')
-    plt.ylabel('Signo zodiacal')
-    plt.title('Trayectoria de Plutón, Urano y Neptuno a través de los signos del zodíaco')
+    plt.xlabel('Date')
+    plt.ylabel('Zodiac Sign')
+    plt.title('Path of Pluto, Uranus, and Neptune through Zodiac Signs')
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
+
+    # Set custom labels for the Y-axis with zodiac signs
+    zodiac_signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius",
+                    "Capricorn", "Aquarius", "Pisces"]
+    plt.yticks(range(len(zodiac_signs)), zodiac_signs)
+
     plt.xticks(rotation=45)
     plt.show()
 
