@@ -8,8 +8,8 @@ from entity.signs import Signs
 
 
 def main():
-    start_date = datetime.datetime(1990, 1, 1)
-    end_date = datetime.datetime(2030, 12, 31)
+    start_date = datetime.datetime(2022, 1, 1)
+    end_date = datetime.datetime(2026, 12, 31)
 
     dates = []
     pluto_values = []
@@ -55,7 +55,7 @@ def main():
     plt.tight_layout()
 
     # Set custom labels for the Y-axis with zodiac signs
-    plt.yticks(range(len(Signs.zodiac)), Signs.zodiac)
+    plt.yticks(range(len(Signs.ZODIAC)), Signs.ZODIAC)
     plt.xticks(rotation=45)
     plt.show()
 

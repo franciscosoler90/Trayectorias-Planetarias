@@ -9,7 +9,7 @@ class Calculate:
 
     def calculate_zodiac_sign(degree):
         index = int(degree // 30)
-        return Signs.zodiac[index]
+        return Signs.ZODIAC[index]
 
     def calculate_planet_position(planet, date):
         observer = ephem.Observer()
@@ -22,7 +22,7 @@ class Calculate:
         return ecliptic_longitude
 
     def sign_to_value(sign):
-        return Signs.zodiac.index(sign)
+        return Signs.ZODIAC.index(sign)
 
     def compute(self, observer):
         pass
