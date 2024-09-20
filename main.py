@@ -3,10 +3,11 @@ import datetime
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+zodiac_signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius",
+                "Capricorn", "Aquarius", "Pisces"]
+
 
 def calculate_zodiac_sign(degree):
-    zodiac_signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius",
-                    "Capricorn", "Aquarius", "Pisces"]
     index = int(degree // 30)
     return zodiac_signs[index]
 
@@ -23,8 +24,6 @@ def calculate_planet_position(planet, date):
 
 
 def sign_to_value(sign):
-    zodiac_signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius",
-                    "Capricorn", "Aquarius", "Pisces"]
     return zodiac_signs.index(sign)
 
 
@@ -76,10 +75,7 @@ def main():
     plt.tight_layout()
 
     # Set custom labels for the Y-axis with zodiac signs
-    zodiac_signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius",
-                    "Capricorn", "Aquarius", "Pisces"]
     plt.yticks(range(len(zodiac_signs)), zodiac_signs)
-
     plt.xticks(rotation=45)
     plt.show()
 
