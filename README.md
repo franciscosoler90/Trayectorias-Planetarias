@@ -1,4 +1,4 @@
-# AstroZodiac: Trayectorias Planetarias en el Zodíaco (1990-2030)
+# AstroZodiac: Trayectorias Planetarias en el Zodíaco
 
 Este proyecto es una herramienta astrológica desarrollada en Python que calcula y visualiza la trayectoria de Plutón, Urano y Neptuno a través de los signos zodiacales desde 1990 hasta 2030. Utiliza la librería `ephem` para calcular la posición de los planetas en fechas específicas y `matplotlib` para graficar los resultados.
 
