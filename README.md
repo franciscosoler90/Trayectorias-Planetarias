@@ -1,13 +1,13 @@
 # AstroZodiac: Trayectorias Planetarias en el Zodíaco
 
-Este proyecto es una herramienta astrológica desarrollada en Python que calcula y visualiza la trayectoria de Plutón, Urano y Neptuno a través de los signos zodiacales desde 1990 hasta 2030. Utiliza la librería `ephem` para calcular la posición de los planetas en fechas específicas y `matplotlib` para graficar los resultados.
+Este proyecto es una herramienta astrológica desarrollada en Python que calcula y visualiza la trayectoria de Plutón, Urano y Neptuno. Utiliza la librería `ephem` para calcular la posición de los planetas en fechas específicas y `matplotlib` para graficar los resultados.
 
 ## Descripción
 
-El objetivo de este proyecto es estudiar cómo se mueven Plutón, Urano y Neptuno a lo largo de los signos del zodíaco durante un periodo de 40 años. El programa:
+El objetivo de este proyecto es estudiar cómo se mueven Plutón, Urano y Neptuno a lo largo del tiempo. 
+El programa:
 1. Calcula la longitud eclíptica de cada planeta para cada fecha en un intervalo de 10 días.
-2. Asigna el signo zodiacal correspondiente a la posición calculada.
-3. Genera un gráfico que muestra la trayectoria de cada planeta a través de los signos zodiacales.
+2. Genera un gráfico que muestra la trayectoria de cada planeta.
 
 ## Instalación
 
@@ -43,7 +43,7 @@ Este proyecto requiere las siguientes librerías:
 Estas dependencias están listadas en el archivo requirements.txt.
 
 ## Resultados
-El gráfico resultante muestra cómo los planetas transitan por cada signo del zodíaco en el periodo de tiempo especificado.
+El gráfico resultante muestra cómo los planetas transitan en el periodo de tiempo especificado.
 
 ## Aprendizajes
 Este proyecto me ha permitido aprender sobre:
