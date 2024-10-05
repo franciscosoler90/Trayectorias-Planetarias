@@ -1,4 +1,4 @@
-# AstroZodiac: Trayectorias Planetarias en el Zodíaco
+# Trayectorias Planetarias
 
 Este proyecto es una herramienta astronómica desarrollada en Python que calcula y visualiza la trayectoria de Plutón, Urano y Neptuno. Utiliza la librería `ephem` para calcular la posición de los planetas en fechas específicas y `matplotlib` para graficar los resultados.
 
