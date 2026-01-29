@@ -1,56 +1,87 @@
 # Trayectorias Planetarias
 
-Este proyecto es una herramienta astronómica desarrollada en Python que calcula y visualiza la trayectoria de Plutón, Urano y Neptuno. Utiliza la librería `ephem` para calcular la posición de los planetas en fechas específicas y `matplotlib` para graficar los resultados.
+Una herramienta astronómica en Python para calcular y visualizar las trayectorias eclípticas de Plutón, Urano y Neptuno utilizando la librería `skyfield`.
 
-## Descripción
+## Descripción General
 
-El objetivo de este proyecto es estudiar cómo se mueven Plutón, Urano y Neptuno a lo largo del tiempo. 
-El programa:
-1. Calcula la longitud eclíptica de cada planeta para cada fecha en un intervalo de 10 días.
-2. Genera un gráfico que muestra la trayectoria de cada planeta.
+Este proyecto ofrece una implementación moderna para rastrear las posiciones de los planetas en el sistema solar. Utiliza `skyfield`, el sucesor de la clásica librería `ephem`, para calcular la longitud eclíptica de Plutón, Urano y Neptuno.
 
-## Instalación
+El objetivo principal es proporcionar una herramienta educativa y robusta para entender el movimiento planetario, evitando problemas comunes de instalación de dependencias complejas.
 
-1. Clona este repositorio:
-```bash
-git clone https://github.com/fransolerc/Trayectorias-Planetarias.git
-cd Trayectorias-Planetarias
+## Características
+
+- **Cálculo de Posición Planetaria**: Utiliza `skyfield` para obtener la longitud eclíptica de los planetas con alta precisión.
+- **Visualización Gráfica**: Genera un gráfico con `matplotlib` que muestra las trayectorias de los planetas.
+- **Manejo de Discontinuidades**: Incluye una función para ajustar los valores de longitud y evitar saltos abruptos (de 360° a 0°), asegurando una visualización continua.
+- **Código Modular y Moderno**: La lógica de cálculo está separada de la presentación, y el proyecto utiliza dependencias actuales que son fáciles de instalar en cualquier sistema.
+
+## Empezando
+
+Sigue estas instrucciones para obtener una copia del proyecto y ejecutarlo en tu máquina local.
+
+### Prerrequisitos
+
+Asegúrate de tener Python 3.x instalado en tu sistema.
+
+### Instalación y Ejecución
+
+1.  **Clona el repositorio:**
+    ```bash
+    git clone https://github.com/fransolerc/Trayectorias-Planetarias.git
+    cd Trayectorias-Planetarias
+    ```
+
+2.  **Crea y activa un entorno virtual (recomendado):**
+    ```bash
+    python -m venv env
+    # En Windows
+    .\env\Scripts\activate
+    # En macOS/Linux
+    source env/bin/activate
+    ```
+
+3.  **Instala las dependencias:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    `skyfield` descarga automáticamente los datos de efemérides necesarios la primera vez que se ejecuta.
+
+4.  **Ejecuta el script principal:**
+    ```bash
+    python main.py
+    ```
+    Al ejecutarlo, se mostrará un gráfico con las trayectorias planetarias para el año 2024.
+
+## Uso
+
+Para cambiar el período de tiempo de la simulación, puedes modificar las variables `start_date` y `end_date` en el archivo `main.py`.
+
+```python
+# main.py
+def main():
+    start_date = datetime.datetime(2024, 1, 1)
+    end_date = datetime.datetime(2024, 12, 31)
+    # ...
 ```
 
-2. Configura un Entorno Virtual (Opcional, pero recomendado)
-```bash
-python -m venv env
-.\env\Scripts\activate
-```
+## Estructura del Proyecto
 
-3. Instalar las dependencias
-```bash
-pip install -r requirements.txt
 ```
-
-4. Ejecutar el proyecto
-```bash
-python main.py
+.
+├── entity/
+│   └── signs.py       # Define entidades (actualmente, signos del zodiaco).
+├── modules/
+│   └── calculate.py   # Contiene la lógica para los cálculos astronómicos con skyfield.
+├── main.py            # Script principal que ejecuta la simulación y genera el gráfico.
+├── requirements.txt   # Lista de dependencias de Python.
+└── README.md          # Este archivo.
 ```
 
 ## Dependencias
-Este proyecto requiere las siguientes librerías:
 
-- ephem: Para cálculos astronómicos.
-- matplotlib: Para la visualización gráfica.
-- datetime: Para la gestión de fechas (incluido en la biblioteca estándar de Python).
-
-Estas dependencias están listadas en el archivo requirements.txt.
-
-## Resultados
-El gráfico resultante muestra cómo los planetas transitan en el periodo de tiempo especificado.
-
-## Aprendizajes
-Este proyecto me ha permitido aprender sobre:
-
-- Uso de la librería ephem para cálculos astronómicos.
-- Generación y personalización de gráficos con matplotlib.
-- Manejo de fechas y tiempos en Python.
+-   `skyfield`: Para los cálculos de mecánica celeste.
+-   `matplotlib`: Para la generación de gráficos.
 
 ## Contribuciones
-Este proyecto fue realizado con fines educativos. Si tienes sugerencias o mejoras, ¡no dudes en enviar un pull request!
+
+Este proyecto fue creado con fines educativos. Las contribuciones que mejoren la funcionalidad, la documentación o la estructura del código son bienvenidas. Si tienes alguna sugerencia, por favor abre un *issue* o envía un *pull request*.
