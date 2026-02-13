@@ -1,60 +1,71 @@
-# Trayectorias Planetarias
+# Planetary Trajectories
 
-Una herramienta astronómica en Python para calcular y visualizar las trayectorias eclípticas de Plutón, Urano y Neptuno utilizando la librería `skyfield`.
+A Python astronomical tool to calculate and visualize the ecliptic trajectories of Pluto, Uranus, and Neptune using the `skyfield` library.
 
-## Descripción General
+## Overview
 
-Este proyecto ofrece una implementación moderna para rastrear las posiciones de los planetas en el sistema solar. Utiliza `skyfield`, el sucesor de la clásica librería `ephem`, para calcular la longitud eclíptica de Plutón, Urano y Neptuno.
+This project offers a modern implementation to track the positions of planets in the solar system. It uses `skyfield`, the successor to the classic `ephem` library, to calculate the ecliptic longitude of Pluto, Uranus, and Neptune.
 
-El objetivo principal es proporcionar una herramienta educativa y robusta para entender el movimiento planetario, evitando problemas comunes de instalación de dependencias complejas.
+The main goal is to provide an educational and robust tool to understand planetary motion, avoiding common installation problems of complex dependencies.
 
-## Características
+## Features
 
-- **Cálculo de Posición Planetaria**: Utiliza `skyfield` para obtener la longitud eclíptica de los planetas con alta precisión.
-- **Visualización Gráfica**: Genera un gráfico con `matplotlib` que muestra las trayectorias de los planetas.
-- **Manejo de Discontinuidades**: Incluye una función para ajustar los valores de longitud y evitar saltos abruptos (de 360° a 0°), asegurando una visualización continua.
-- **Código Modular y Moderno**: La lógica de cálculo está separada de la presentación, y el proyecto utiliza dependencias actuales que son fáciles de instalar en cualquier sistema.
+- **Planetary Position Calculation**: Uses `skyfield` to obtain the ecliptic longitude of planets with high precision.
+- **Graphical Visualization**: Generates a chart with `matplotlib` showing the trajectories of the planets.
+- **Discontinuity Handling**: Includes a function to adjust longitude values and avoid abrupt jumps (from 360° to 0°), ensuring continuous visualization.
+- **Modular and Modern Code**: Calculation logic is separated from presentation, and the project uses current dependencies that are easy to install on any system.
 
-## Empezando
+## Getting Started
 
-Sigue estas instrucciones para obtener una copia del proyecto y ejecutarlo en tu máquina local.
+Follow these instructions to get a copy of the project and run it on your local machine.
 
-### Prerrequisitos
+### Prerequisites
 
-Asegúrate de tener Python 3.x instalado en tu sistema.
+Make sure you have Python 3.x installed on your system.
 
-### Instalación y Ejecución
+### Installation and Execution
 
-1.  **Clona el repositorio:**
+1.  **Clone the repository:**
     ```bash
     git clone https://github.com/fransolerc/Trayectorias-Planetarias.git
     cd Trayectorias-Planetarias
     ```
 
-2.  **Crea y activa un entorno virtual (recomendado):**
+2.  **Create and activate a virtual environment (recommended):**
     ```bash
     python -m venv env
-    # En Windows
+    # On Windows
     .\env\Scripts\activate
-    # En macOS/Linux
+    # On macOS/Linux
     source env/bin/activate
     ```
 
-3.  **Instala las dependencias:**
+    > **Note for Windows Users:** If you encounter the error:
+    > ```
+    > .\env\Scripts\activate : No se puede cargar el archivo ... porque la ejecución de scripts está deshabilitada en este sistema.
+    > + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    > + FullyQualifiedErrorId : UnauthorizedAccess
+    > ```
+    > You need to enable script execution by running the following command in PowerShell:
+    > ```powershell
+    > Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    > ```
+
+3.  **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
-    `skyfield` descarga automáticamente los datos de efemérides necesarios la primera vez que se ejecuta.
+    `skyfield` automatically downloads the necessary ephemeris data the first time it runs.
 
-4.  **Ejecuta el script principal:**
+4.  **Run the main script:**
     ```bash
     python main.py
     ```
-    Al ejecutarlo, se mostrará un gráfico con las trayectorias planetarias para el año 2024.
+    When executed, a chart showing the planetary trajectories for the year 2024 will be displayed.
 
-## Uso
+## Usage
 
-Para cambiar el período de tiempo de la simulación, puedes modificar las variables `start_date` y `end_date` en el archivo `main.py`.
+To change the simulation time period, you can modify the `start_date` and `end_date` variables in the `main.py` file.
 
 ```python
 # main.py
@@ -64,24 +75,24 @@ def main():
     # ...
 ```
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
 .
 ├── entity/
-│   └── signs.py       # Define entidades (actualmente, signos del zodiaco).
+│   └── signs.py       # Defines entities (currently, zodiac signs).
 ├── modules/
-│   └── calculate.py   # Contiene la lógica para los cálculos astronómicos con skyfield.
-├── main.py            # Script principal que ejecuta la simulación y genera el gráfico.
-├── requirements.txt   # Lista de dependencias de Python.
-└── README.md          # Este archivo.
+│   └── calculate.py   # Contains logic for astronomical calculations with skyfield.
+├── main.py            # Main script that runs the simulation and generates the chart.
+├── requirements.txt   # List of Python dependencies.
+└── README.md          # This file.
 ```
 
-## Dependencias
+## Dependencies
 
--   `skyfield`: Para los cálculos de mecánica celeste.
--   `matplotlib`: Para la generación de gráficos.
+-   `skyfield`: For celestial mechanics calculations.
+-   `matplotlib`: For chart generation.
 
-## Contribuciones
+## Contributions
 
-Este proyecto fue creado con fines educativos. Las contribuciones que mejoren la funcionalidad, la documentación o la estructura del código son bienvenidas. Si tienes alguna sugerencia, por favor abre un *issue* o envía un *pull request*.
+This project was created for educational purposes. Contributions that improve functionality, documentation, or code structure are welcome. If you have any suggestions, please open an *issue* or send a *pull request*.
