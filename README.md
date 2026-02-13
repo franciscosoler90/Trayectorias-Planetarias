@@ -14,6 +14,7 @@ The main goal is to provide an educational and robust tool to understand planeta
 - **Graphical Visualization**: Generates a chart with `matplotlib` showing the trajectories of the planets.
 - **Discontinuity Handling**: Includes a function to adjust longitude values and avoid abrupt jumps (from 360° to 0°), ensuring continuous visualization.
 - **Modular and Modern Code**: Calculation logic is separated from presentation, and the project uses current dependencies that are easy to install on any system.
+- **Command Line Interface**: Easily configure the simulation period via command line arguments.
 
 ## Getting Started
 
@@ -65,14 +66,21 @@ Make sure you have Python 3.x installed on your system.
 
 ## Usage
 
-To change the simulation time period, you can modify the `start_date` and `end_date` variables in the `main.py` file.
+You can customize the simulation period using command-line arguments:
 
-```python
-# main.py
-def main():
-    start_date = datetime.datetime(2024, 1, 1)
-    end_date = datetime.datetime(2024, 12, 31)
-    # ...
+```bash
+# Run for a specific year range
+python main.py --start-date 2025-01-01 --end-date 2025-12-31
+```
+
+If no arguments are provided, it defaults to the year 2024.
+
+## Testing
+
+To run the unit tests, execute the following command from the project root:
+
+```bash
+python -m unittest discover tests
 ```
 
 ## Project Structure
@@ -83,6 +91,8 @@ def main():
 │   └── signs.py       # Defines entities (currently, zodiac signs).
 ├── modules/
 │   └── calculate.py   # Contains logic for astronomical calculations with skyfield.
+├── tests/
+│   └── test_calculate.py # Unit tests for calculation logic.
 ├── main.py            # Main script that runs the simulation and generates the chart.
 ├── requirements.txt   # List of Python dependencies.
 └── README.md          # This file.
