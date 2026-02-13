@@ -18,30 +18,31 @@ class Calculate:
         return ecliptic_lon.degrees
 
     @staticmethod
-    def adjust_longitudes(longitudes):
+    def handle_discontinuities(dates, longitudes):
         """
-        Ajusta una lista de longitudes para evitar saltos de discontinuidad
-        (por ejemplo, de 359° a 1°).
+        Inserts None values to break the plot line when a discontinuity (360 <-> 0) occurs.
+        Returns new lists of dates and longitudes.
         """
-        if not longitudes:
-            return []
+        if not longitudes or not dates:
+            return [], []
 
-        adjusted = [longitudes[0]]
-        offset = 0
+        new_dates = [dates[0]]
+        new_longitudes = [longitudes[0]]
+
         for i in range(1, len(longitudes)):
-            prev = longitudes[i-1]
-            curr = longitudes[i]
+            prev_lon = longitudes[i-1]
+            curr_lon = longitudes[i]
+            curr_date = dates[i]
 
-            # Detecta un salto de 360 a 0
-            if prev - curr > 180:
-                offset += 360
-            # Detecta un salto de 0 a 360 (movimiento retrógrado)
-            elif curr - prev > 180:
-                offset -= 360
+            # Detect a jump greater than 180 degrees (crossing 0/360)
+            if abs(curr_lon - prev_lon) > 180:
+                new_dates.append(curr_date)
+                new_longitudes.append(None)
 
-            adjusted.append(curr + offset)
+            new_dates.append(curr_date)
+            new_longitudes.append(curr_lon)
 
-        return adjusted
+        return new_dates, new_longitudes
 
     @staticmethod
     def calculate_zodiac_sign(degree):

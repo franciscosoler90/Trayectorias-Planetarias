@@ -46,11 +46,11 @@ def main():
 
     logger.info(f"Starting simulation from {start_date.date()} to {end_date.date()}")
 
-    planets_to_plot = {
-        'pluto barycenter': [],
-        'uranus barycenter': [],
-        'neptune barycenter': []
-    }
+    planets_to_plot = [
+        'pluto barycenter',
+        'uranus barycenter',
+        'neptune barycenter'
+    ]
     dates = []
 
     # Generate dates
@@ -60,20 +60,26 @@ def main():
         dates.append(current_date)
         current_date += datetime.timedelta(days=10)
 
+    # Store results for plotting
+    plot_data = {}
+
     # Calculate positions for each planet
     logger.info("Calculating planetary positions...")
-    for planet_name in planets_to_plot.keys():
+    for planet_name in planets_to_plot:
         logger.info(f"Processing {planet_name}...")
-        longitudes = [Calculate.calculate_planet_position(planet_name, date) for date in dates]
-        planets_to_plot[planet_name] = Calculate.adjust_longitudes(longitudes)
+        raw_longitudes = [Calculate.calculate_planet_position(planet_name, date) for date in dates]
+
+        # Handle discontinuities for plotting
+        p_dates, p_longitudes = Calculate.handle_discontinuities(dates, raw_longitudes)
+        plot_data[planet_name] = (p_dates, p_longitudes)
 
     # Plot results
     logger.info("Generating plot...")
     plt.figure(figsize=(12, 8))
-    dates_num = mdates.date2num(dates)
 
-    for planet_name, longitudes in planets_to_plot.items():
-        plt.plot(dates_num, longitudes, label=planet_name.replace(' barycenter', '').capitalize(), linestyle='-', marker='o')
+    for planet_name, (p_dates, p_longitudes) in plot_data.items():
+        dates_num = mdates.date2num(p_dates)
+        plt.plot(dates_num, p_longitudes, label=planet_name.replace(' barycenter', '').capitalize(), linestyle='-', marker='o')
 
     plt.xlabel('Date')
     plt.ylabel('Ecliptic Longitude (Degrees)')
